@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ethers } from "ethers";
+import { EthereumProvider } from "@walletconnect/ethereum-provider";
 import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/ethereum-provider";
 
 export default function ConnectWallet() {
   const [account, setAccount] = useState(null);
@@ -10,19 +10,20 @@ export default function ConnectWallet() {
     try {
       const providerOptions = {
         walletconnect: {
-          package: WalletConnectProvider,
+          package: EthereumProvider,
           options: {
-            rpc: {
-              137: "https://polygon-rpc.com", // Polygonメインネット
+            projectId: "783814c87013fdf816ac5dd729da58b6", // 👈 必須
+            chains: [137], // Polygon Mainnet
+            rpcMap: {
+              137: "https://polygon-rpc.com",
             },
-            chainId: 137,
           },
         },
       };
 
       const web3Modal = new Web3Modal({
-        cacheProvider: false,
         providerOptions,
+        cacheProvider: false,
       });
 
       const instance = await web3Modal.connect();
