@@ -4,35 +4,30 @@ import { useNavigate } from "react-router-dom";
 export default function ProductPage() {
   const navigate = useNavigate();
 
-  // 一般消費者向けの商品リスト
   const products = [
     {
       id: 1,
-      name: "コーヒーマグカップ",
-      description: "毎日のコーヒーにぴったりのシンプルなマグカップ。",
-      price: 800,
-      image: "https://picsum.photos/400/250?coffee"
+      name: "シンプルTシャツ",
+      price: 2000,
+      image: "https://picsum.photos/500/600?shirt"
     },
     {
       id: 2,
-      name: "エコバッグ",
-      description: "買い物や普段使いに便利な折りたたみ式エコバッグ。",
-      price: 500,
-      image: "https://picsum.photos/400/250?bag"
+      name: "デニムパンツ",
+      price: 4500,
+      image: "https://picsum.photos/500/600?jeans"
     },
     {
       id: 3,
-      name: "Bluetoothイヤホン",
-      description: "軽量で使いやすいワイヤレスイヤホン。",
-      price: 2500,
-      image: "https://picsum.photos/400/250?earphone"
+      name: "スニーカー",
+      price: 6000,
+      image: "https://picsum.photos/500/600?sneaker"
     },
     {
       id: 4,
-      name: "ノートとペンセット",
-      description: "勉強や仕事に便利なノートとペンのセット。",
-      price: 600,
-      image: "https://picsum.photos/400/250?notebook"
+      name: "トートバッグ",
+      price: 3500,
+      image: "https://picsum.photos/500/600?bag"
     }
   ];
 
@@ -42,55 +37,63 @@ export default function ProductPage() {
 
   return (
     <div style={{ 
-      backgroundColor: "#f5f5f5",
+      backgroundColor: "#fff",
       minHeight: "100vh",
       padding: "2rem"
     }}>
-      <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>商品一覧</h1>
+      <h1 style={{ 
+        textAlign: "center", 
+        marginBottom: "2rem", 
+        fontWeight: "normal",
+        fontSize: "1.8rem"
+      }}>
+        ファッションアイテム
+      </h1>
       <div style={{ 
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: "1.5rem",
-        maxWidth: "900px",
+        gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+        gap: "2rem",
+        maxWidth: "1000px",
         margin: "0 auto"
       }}>
         {products.map((product) => (
           <div key={product.id} style={{
-            backgroundColor: "#fff",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-            padding: "1rem",
-            textAlign: "center"
+            textAlign: "center",
+            cursor: "pointer"
           }}>
             <img 
               src={product.image} 
               alt={product.name} 
               style={{ 
                 width: "100%", 
-                borderRadius: "8px", 
-                marginBottom: "1rem" 
+                borderRadius: "4px",
+                marginBottom: "0.8rem" 
               }} 
             />
-            <h2 style={{ margin: "0.5rem 0" }}>{product.name}</h2>
-            <p style={{ color: "#555", fontSize: "0.9rem" }}>{product.description}</p>
-            <p style={{ fontWeight: "bold", margin: "0.5rem 0" }}>
-              {product.price} 円
+            <h2 style={{ 
+              fontSize: "1rem", 
+              fontWeight: "normal", 
+              margin: "0.2rem 0" 
+            }}>
+              {product.name}
+            </h2>
+            <p style={{ fontSize: "0.95rem", color: "#333", margin: "0.2rem 0" }}>
+              ¥{product.price.toLocaleString()}
             </p>
             <button 
               onClick={() => goToPayment(product)} 
               style={{
                 marginTop: "0.5rem",
-                width: "100%",
-                padding: "0.7rem",
-                backgroundColor: "#0070f3",
+                padding: "0.5rem 1rem",
+                backgroundColor: "#111",
                 color: "white",
                 border: "none",
-                borderRadius: "8px",
-                fontSize: "1rem",
+                borderRadius: "4px",
+                fontSize: "0.9rem",
                 cursor: "pointer"
               }}
             >
-              暗号資産で決済へ進む
+              暗号資産で購入
             </button>
           </div>
         ))}
