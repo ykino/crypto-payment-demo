@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { ethers } from "ethers";
+import ConnectWallet from "./ConnectWallet";  // ✅ 追加
 
 export default function PaymentPage() {
   const query = new URLSearchParams(useLocation().search);
@@ -15,7 +16,7 @@ export default function PaymentPage() {
   const [userAddress, setUserAddress] = useState("");
   const [history, setHistory] = useState([]);
 
-  // 履歴の読み込み
+  // 履歴読み込み
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("paymentHistory") || "[]");
     setHistory(saved);
@@ -142,16 +143,21 @@ export default function PaymentPage() {
       minHeight: "100vh", 
       display: "flex", 
       justifyContent: "center", 
-      alignItems: "center" 
+      alignItems: "center", 
+      padding: "1rem" 
     }}>
       <div style={{ 
         backgroundColor: "#fff", 
         borderRadius: "12px", 
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)", 
-        padding: "2rem", 
-        width: "420px" 
+        padding: "1.5rem", 
+        width: "100%",           
+        maxWidth: "420px"        
       }}>
         <h1 style={{ textAlign: "center", marginBottom: "1rem" }}>決済ページ</h1>
+
+        {/* ✅ WalletConnect対応のウォレット接続ボタン */}
+        <ConnectWallet />
 
         <p><strong>商品:</strong> {productName}</p>
         <p><strong>元の金額:</strong> {priceYen} 円</p>
@@ -214,7 +220,6 @@ export default function PaymentPage() {
           {status}
         </p>
 
-        {/* 履歴セクション */}
         <hr style={{ margin: "1.5rem 0" }} />
         <h2 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>支払い履歴</h2>
         {history.length === 0 ? (
